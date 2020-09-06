@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{AE2BE7E4-4BD5-7F1E-B88F-E489945853C5}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "terrain_mesh_rederer",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
