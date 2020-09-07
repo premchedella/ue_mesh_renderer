@@ -7,7 +7,8 @@
 
 void FTerrainRenderEditor::RegisterCommands()
 {
-  UI_COMMAND(TerrainRenderCommand, "Terrain Render", "Various Options in Terrain Mesh",
+  UI_COMMAND(TerrainRenderCommand, "Terrain\nRender", 
+      "Renders Terrain Mesh",
       EUserInterfaceActionType::Button, FInputGesture());  
 }
 
