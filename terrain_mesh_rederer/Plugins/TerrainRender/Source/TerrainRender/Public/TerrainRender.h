@@ -22,4 +22,8 @@ private:
   void UpdateToolBar();
   void AddToolbarButton(FToolBarBuilder& Builder);  
   void TerrainRenderAction();
+  FString GetFileName();
+  void FileParse(const FString& FileName);
+
+  void PrintData();
 };
