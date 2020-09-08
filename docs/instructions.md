@@ -42,12 +42,22 @@ The Visual Studio stops and reload the Visual Studio again.  A new plugin **Terr
 The source code for the Plugins are available at *Plugins\TerrainRender\Source\TerrainRender*.  It contains * *. Build.cs* file, *Private* and *Public* folders.  Normally *Private* folder contains **.h* files and *Public* folder cotains *.cpp* files.
 
 ### 2.1 Develop Plugin
+The plugin contains the following functionality:
+* A new **Terrain Render** UI button in the UE Editor Tool.
+* Open a File Dialog window selects DEM Elevation Data, which is a ASCII file.
+* Parsing the DEM Elevation Data
+* Rendering the DEM Elevation Data through Mesh.
+
+### 2.2 Terrain Render UI Button
+A new Terrain Render UI button in the UE Editor Tool.
+
+
 * Add a new header, *TerrainRenderEditor.h* and source, *TerrainRenderEditor.h* file, where UE4 Editor has **Terrain Render** as a tool bar button.
 * Add `"EditorStyle"` in the section of `PublicDependencyModuleNames.AddRange` in *TerrainRender.Build.cs* file (to solve the build error).
 *  Added Code to build the **Terrain Render** button in the UE Editor tool.
 * Compile the code.  Press F5, solve build error if any.
 
-Following is the **Terrain Render** UI button that's added, which is shown in the red color highlighted.
+Following image shows the **Terrain Render** UI button that's added, which is shown in the red color highlighted.
 
 <img src=./images/terrain_render_ui.JPG width=90%/>  
 
@@ -55,17 +65,46 @@ When user presses the **Terrain Render** UI button is pressed, following message
 
 <img src=./images/terrain_render_ui_log.JPG width=90%/> 
 
+### 2.3 File Open Dialog Box
+
+Add code in the *TerrainRender.cpp* file to open the dialog box whenever **Terrain Render** UI button is pressed.  
+
+Following image shows the file dialog box open whenever **Terrain Render** UI button is pressed.  
+
+<img src=./images/file_open_dialog.PNG width=90%/> 
+
+Following image shows the ASCII file that was opened/selected when file dialog box opened in the Log window.  
+
+<img src=./images/file_open_dialog_log.PNG width=90%/> 
+
+### 2.4 File Open Dialog Box
+Add two new C++ modules, namely Dem Elevation Parser, and Dem Elevation Data.
+
+These two classes are with the following steps:
+* Press **Content Browser**
+* Select **Add New** drop down box
+* Select **C++ New Class**
+* Select **None** radio box for choose Parent class and then press **Next**
+* Give the **name** **(user has to define)** to the class and select **TerrainRender (Runtime)** and then Press **Create Class**
+
+Dem Elevation Parser module takes input file and parses the input file and stored the parameters and data in Dem Elevation Data module, which is a singleton class.
+
+**Note:** Don't manually add classes and follow the procedure as mentioned above otherwise build errors occurs.
+
+Once the file is parsed then file data parameters are displayed in the **Output Log** window and following picture depicts the same.
+
+<img src=./images/file_parse_log.PNG width=90%/>
 
 
+## 3. References
 
-
-
-
-
-
-
-
-
+Following are the reference:
+1. [Unreal Project Create](https://docs.unrealengine.com/en-US/Engine/Basics/Projects/Browser/index.html)
+1. [Unreal Plugin Create](https://docs.unrealengine.com/en-US/Programming/Plugins/index.html) 
+1. [Unreal TArrays](https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/TArrays/index.html)
+1. [Unreal String Handling](https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/StringHandling/index.html)
+1. [Unreal File Open Dialog](https://docs.unrealengine.com/en-US/API/Developer/DesktopPlatform/IDesktopPlatform/OpenFileDialog/1/index.html)
+1. [Unreal File Opening/Reading](https://docs.unrealengine.com/en-US/API/Runtime/Core/Misc/FFileHelper/index.html)
 
 
 
