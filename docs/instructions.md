@@ -77,7 +77,7 @@ Following image shows the ASCII file that was opened/selected when file dialog b
 
 <img src=./images/file_open_dialog_log.PNG width=90%/> 
 
-### 2.4 File Open Dialog Box
+### 2.4 Parsing & Data
 Add two new C++ modules, namely Dem Elevation Parser, and Dem Elevation Data.
 
 These two classes are with the following steps:
@@ -96,6 +96,66 @@ Once the file is parsed then file data parameters are displayed in the **Output 
 <img src=./images/file_parse_log.PNG width=90%/>
 
 
+### 2.5 Triangle Draw
+To draw a triangle in the Unreal Engine using C++, **ProceduralMeshComponent** needs to be added in the public dependency build system, *terrain_mesh_rederer.Build.cs*
+
+Add a new C++ module Triangle Draw :
+* Press **Content Browser**
+* Select **Add New** drop down box
+* Select **C++ New Class**
+* Select **Actor** radio box for choose Parent class and then press **Next**
+* Give the **name, (DrawTraingle, user has to define)** to the class and select **terrain_mesh_rederer (Runtime)** and then Press **Create Class**.
+
+In the header file, define **Category = "DrawTriangle"**, and fill the rest of the variables, and functions.  Compile the code, resolve if there are any build errors.
+
+Create the Blue Print for the this class with the following insturctions.
+* Press **Content Browser**
+* Select **Add New** drop down box
+* Select **BluePrint Class**
+* Search in All class, Select **DrawTriangle**, and press **Select** button.
+* Rename the BluePrint class to **DrawTriangle_BP**, by right clicking with the mouse.
+* Drag the **DrawTriangle_BP** to World window, based on the code lower/upper triangle or Square will be displayed.
+
+Following is the code to draw the triangles and square.
+
+
+``` C++
+  vertices.Add(FVector(0.0f, 100.0f, 0.0f));
+  vertices.Add(FVector(0.0f, 0.0f, 0.0f));
+  vertices.Add(FVector(100.0f, 0.0f, 0.0f));
+  vertices.Add(FVector(100.0f, 100.0f, 0.0f));
+
+  //Lower Triangle
+  triangles.Add(0);
+  triangles.Add(1);
+  triangles.Add(2);
+
+  //Upper Triangle
+
+  triangles.Add(0);
+  triangles.Add(2);
+  triangles.Add(3);
+```
+
+The portion of Upper is commented, then Lower triangle is displayed in the world as shown in the following figure
+
+<img src=./images/lower_triangle.PNG width=90%/>
+
+
+
+The portion of Lower is commented, then Upper triangle is displayed in the world as shown in the following figure
+
+<img src=./images/upper_triangle.PNG width=90%/>
+
+
+
+The portions of both Lower and Upper makes a square, is displayed in the world as shown in the following figure
+
+<img src=./images/upper_lower_triangle.PNG width=90%/>
+
+
+
+
 ## 3. References
 
 Following are the reference:
@@ -105,6 +165,25 @@ Following are the reference:
 1. [Unreal String Handling](https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/StringHandling/index.html)
 1. [Unreal File Open Dialog](https://docs.unrealengine.com/en-US/API/Developer/DesktopPlatform/IDesktopPlatform/OpenFileDialog/1/index.html)
 1. [Unreal File Opening/Reading](https://docs.unrealengine.com/en-US/API/Runtime/Core/Misc/FFileHelper/index.html)
+1. [Editor Plugin](http://wlosok.cz/editor-plugins-in-ue4-1-intro/)
+1. [Editor Plugin](https://lxjk.github.io/2019/10/01/How-to-Make-Tools-in-U-E.html)
+1. [Procedural Mesh Component](http://wlosok.cz/procedural-mesh-in-ue4-1-triangle/)
+
+## 3. TODO
+1. In the Plugin, Get the class of *DrawTriangle_BP* and invoke that class in the World, draw the Triangle with out manually.  Following is the code, need to explore on this.
+
+```
+ #include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
+ 
+ static ConstructorHelpers::FClassFinder<AActor> DrawTriangleOb(TEXT("/Game/DrawTriangle_BP"));
+UBlueprintGeneratedClass* TriangleClass = Cast<UBlueprintGeneratedClass>(DrawTriangleOb.Class);
+UBlueprint* TriangleBlueprint = Cast<UBlueprint>(TriangleClass->ClassGeneratedBy);
+ 
+TriangleBlueprint->GetName()->ToString();
+```
+
+2. Create another class based on the **ProceduralMeshComponent**, get the data from the Dem Elevation Data module , prepare the mesh and invoke the new class in the world that shows the mesh of file.
+3. Get the *Get World Origin Location* function and use this while drawing.
 
 
 
