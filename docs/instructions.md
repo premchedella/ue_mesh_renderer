@@ -169,7 +169,7 @@ Following are the reference:
 1. [Editor Plugin](https://lxjk.github.io/2019/10/01/How-to-Make-Tools-in-U-E.html)
 1. [Procedural Mesh Component](http://wlosok.cz/procedural-mesh-in-ue4-1-triangle/)
 
-## 3. TODO
+## 4. TODO
 1. In the Plugin, Get the class of *DrawTriangle_BP* and invoke that class in the World, draw the Triangle with out manually.  Following is the code, need to explore on this.
 
 ```
